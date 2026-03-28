@@ -9,7 +9,7 @@ helmCharts:
   namespace: cnpg-system
   valuesFile: "prod-values.yaml"
   includeCRDs: true
-- name: cnpg/plugin-barman-cloud
+- name: plugin-barman-cloud
   repo: https://cloudnative-pg.github.io/charts
   version: 0.5.0
   releaseName: plugin-barman-cloud
