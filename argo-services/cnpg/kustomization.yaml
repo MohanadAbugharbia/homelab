@@ -9,12 +9,12 @@ helmCharts:
   namespace: cnpg-system
   valuesFile: "prod-values.yaml"
   includeCRDs: true
-- name: plugin-barman-cloud
-  repo: https://cloudnative-pg.github.io/charts
-  version: 0.5.0
-  releaseName: plugin-barman-cloud
-  namespace: cnpg-system
-  includeCRDs: true
+# - name: plugin-barman-cloud
+#   repo: https://cloudnative-pg.github.io/charts
+#   version: 0.5.0
+#   releaseName: plugin-barman-cloud
+#   namespace: cnpg-system
+#   includeCRDs: true
 
 resources:
   - postgresql-cluster-image-catalog.yaml
