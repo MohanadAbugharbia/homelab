@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: cnpg-system
     server: https://kubernetes.default.svc
-  project: default
+  project: infrastructure
   source:
     repoURL: git@github.com:MohanadAbugharbia/homelab.git
     path: argo-services/cnpg
