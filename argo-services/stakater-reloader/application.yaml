@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stakater-reloader
+  namespace: argo
+spec:
+  destination:
+    namespace: stakater
+    server: https://kubernetes.default.svc
+  project: infrastructure
+  source:
+    repoURL: git@github.com:MohanadAbugharbia/homelab.git
+    path: argo-services/stakater-reloader
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      enabled: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
