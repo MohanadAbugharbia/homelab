@@ -1,0 +1,36 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: immich-database
+spec:
+  instances: 1
+
+  storage:
+    size: 1Gi
+
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.9-0.4.3
+
+  postgresql:
+    shared_preload_libraries:
+      - "vchord.so"
+
+  managed:
+    roles:
+      - name: immich
+        ensure: present
+        login: true
+        superuser: true
+        createdb: true
+        passwordSecret:
+          name: immich-db-cred
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: immich-database
+spec:
+  name: immich
+  owner: immich
+  cluster:
+    name: immich-database

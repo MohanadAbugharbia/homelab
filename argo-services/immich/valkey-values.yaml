@@ -1,0 +1,19 @@
+# Resource limits/requests for the main Valkey container
+resources:
+  limits:
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+
+# Persistent storage configuration (standalone deployment only)
+dataStorage:
+  # Enable persistent volume claim creation
+  enabled: true
+
+  # Request size (e.g. 5Gi) for dynamically provisioned volume
+  requestedSize: "2Gi"
+
+  # Name of the storage class to use
+  className: "local-path"
