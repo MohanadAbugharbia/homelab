@@ -27,3 +27,10 @@ helmCharts:
   releaseName: valkey
   namespace: immich
   valuesFile: valkey-values.yaml
+
+configMapGenerator:
+- name: immich-server-config
+  literals:
+    - IMMICH_MACHINE_LEARNING_URL=http://immich-ml:3003
+    - REDIS_HOSTNAME=valkey
+    - TZ=Europe/Berlin

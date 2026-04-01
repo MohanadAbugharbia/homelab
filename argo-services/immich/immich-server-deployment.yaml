@@ -44,10 +44,9 @@ spec:
               secretKeyRef:
                 name: immich-db-cred
                 key: dbname
-          - name: REDIS_HOSTNAME
-            value: valkey
-          - name: IMMICH_MACHINE_LEARNING_URL
-            value: http://immich-ml:3003
+        envFrom:
+          - configMapRef:
+              name: immich-server-config
         volumeMounts:
           - mountPath: /data
             name: data
