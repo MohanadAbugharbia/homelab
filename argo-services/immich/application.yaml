@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: git@github.com:MohanadAbugharbia/homelab.git
     path: argo-services/immich
-    targetRevision: immich
+    targetRevision: HEAD
   syncPolicy:
     automated:
       enabled: true
