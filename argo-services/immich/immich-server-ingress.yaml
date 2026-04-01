@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: immich-server
+spec:
+  ingressClassName: tailscale
+  rules:
+  - host: immich
+    http:
+      paths:
+      - backend:
+          service:
+            name: immich-server
+            port:
+              number: 2283
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - immich
+    secretName: immich-tls

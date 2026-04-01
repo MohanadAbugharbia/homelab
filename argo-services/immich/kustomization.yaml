@@ -1,15 +1,29 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+images:
+- name: immich-server
+  newName: ghcr.io/immich-app/immich-server
+  newTag: v2.6.3
+- name: immich-ml
+  newName: ghcr.io/immich-app/immich-machine-learning
+  newTag: v2.6.3
+
 resources:
-  - immich-pvc.yaml
+  - encrypted-secrets.yaml
   - database.yaml
+  - immich-pvc.yaml
+  - immich-server-deployment.yaml
+  - immich-server-service.yaml
+  - immich-server-ingress.yaml
+  - immich-ml-deployment.yaml
+  - immich-ml-service.yaml
+
 
 helmCharts:
-- name: immich
-  repo: oci://ghcr.io/immich-app/immich-charts/immich
-  version: 0.11.0
-  releaseName: immich
+- name: valkey
+  repo: https://valkey.io/valkey-helm/
+  version: 0.9.3
+  releaseName: valkey
   namespace: immich
-  valuesFile: "prod-values.yaml"
-  includeCRDs: true
+  valuesFile: valkey-values.yaml
