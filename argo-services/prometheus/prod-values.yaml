@@ -1,0 +1,31 @@
+alertmanager:
+  enabled: false
+
+grafana:
+  enabled: false
+
+prometheus:
+  prometheusSpec:
+    externalLabels:
+      cluster: homelab
+    retention: 3d
+    tsdb:
+      outOfOrderTimeWindow: 12h
+    storageSpec:
+     volumeClaimTemplate:
+       spec:
+         accessModes: ["ReadWriteOnce"]
+         storageClassName: local-path
+         resources:
+           requests:
+             storage: 20Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+
+prometheus-node-exporter:
+  podLabels:
+    jobLabel: homelab-node-exporter
+  service:
+    labels:
+      jobLabel: homelab-node-exporter
