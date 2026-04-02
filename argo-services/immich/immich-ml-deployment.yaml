@@ -80,6 +80,7 @@ spec:
               - ALL
           privileged: false
           runAsNonRoot: true
+          allowPrivilegeEscalation: false
       volumes:
         - name: model-cache
           persistentVolumeClaim:

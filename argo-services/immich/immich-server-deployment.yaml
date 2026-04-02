@@ -81,6 +81,7 @@ spec:
               - ALL
           privileged: false
           runAsNonRoot: true
+          allowPrivilegeEscalation: false
       volumes:
         - name: data
           persistentVolumeClaim:
