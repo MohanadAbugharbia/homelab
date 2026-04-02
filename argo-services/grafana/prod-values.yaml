@@ -1,0 +1,25 @@
+
+ingress:
+  enabled: true
+  hosts:
+    - grafana
+  tls:
+    - hosts:
+      - grafana
+      secretName: grafana-tls
+
+admin:
+  existingSecret: "grafana-admin-user"
+  userKey: user
+  passwordKey: password
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        uid: prometheus
+        type: prometheus
+        url: https://prometheus-kube-prometheus-prometheus:9090
+        isDefault: true
+        httpMethod: POST
