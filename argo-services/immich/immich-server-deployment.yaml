@@ -18,6 +18,7 @@ spec:
     spec:
       containers:
       - image: immich-server
+        imagePullPolicy: IfNotPresent
         name: immich-server
         ports:
           - name: http
@@ -74,7 +75,15 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 1
           failureThreshold: 30
+        securityContext:
+          capabilities:
+            drop:
+              - ALL
+          privileged: false
+          runAsNonRoot: true
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: immich-library
+      securityContext:
+        runAsNonRoot: true
