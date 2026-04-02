@@ -1,6 +1,7 @@
 
 ingress:
   enabled: true
+  ingressClassName: tailscale
   hosts:
     - grafana
   tls:
