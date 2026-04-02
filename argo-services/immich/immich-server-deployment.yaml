@@ -86,4 +86,7 @@ spec:
           persistentVolumeClaim:
             claimName: immich-library
       securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
         runAsNonRoot: true
+        fsGroup: 10001
