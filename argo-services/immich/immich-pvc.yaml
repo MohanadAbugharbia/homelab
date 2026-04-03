@@ -20,5 +20,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi # Ignored by local-path provisioner, but required by PVC spec
+      storage: 10Gi
   storageClassName: longhorn
