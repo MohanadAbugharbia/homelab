@@ -16,4 +16,4 @@ dataStorage:
   requestedSize: "2Gi"
 
   # Name of the storage class to use
-  className: "local-path"
+  className: "longhorn"

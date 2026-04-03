@@ -17,8 +17,8 @@ metadata:
   name: immich-model-cache
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Gi # Ignored by local-path provisioner, but required by PVC spec
-  storageClassName: local-path
+  storageClassName: longhorn
