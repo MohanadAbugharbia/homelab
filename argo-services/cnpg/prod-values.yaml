@@ -1,4 +1,4 @@
 
 replicaCount: 1
 monitoring:
-  podMonitorEnabled: false
+  podMonitorEnabled: true

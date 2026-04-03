@@ -24,6 +24,9 @@ spec:
         createdb: true
         passwordSecret:
           name: immich-db-cred
+  monitoring:
+    enablePodMonitor: true
+  switchoverDelay: 60
 
 ---
 apiVersion: postgresql.cnpg.io/v1
