@@ -9,30 +9,3 @@ helmCharts:
   namespace: longhorn-system
   valuesFile: "prod-values.yaml"
   includeCRDs: true
-
-patches:
-# Patch service accounts and permissions to add argocd sync-wave -1 to ensure they are created before any other resources that depend on them.
-- target:
-    kind: ClusterRole
-  patch: |-
-    - op: add
-      path: /metadata/annotations
-      value:
-        argocd.argoproj.io/sync-wave: "-3"
-        argocd.argoproj.io/hook: PreSync
-- target:
-    kind: ServiceAccount
-  patch: |-
-    - op: add
-      path: /metadata/annotations
-      value:
-        argocd.argoproj.io/sync-wave: "-2"
-        argocd.argoproj.io/hook: PreSync
-- target:
-    kind: ClusterRoleBinding
-  patch: |-
-    - op: add
-      path: /metadata/annotations
-      value:
-        argocd.argoproj.io/sync-wave: "-1"
-        argocd.argoproj.io/hook: PreSync
