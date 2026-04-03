@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argo
+spec:
+  destination:
+    namespace: longhorn-system
+    server: https://kubernetes.default.svc
+  project: infrastructure
+  source:
+    repoURL: git@github.com:MohanadAbugharbia/homelab.git
+    path: argo-services/longhorn
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      enabled: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

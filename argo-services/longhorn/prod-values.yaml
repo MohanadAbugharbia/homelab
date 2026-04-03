@@ -1,0 +1,31 @@
+defaultSettings:
+  replicaAutoBalance: best-effort
+  storageReservedPercentageForDefaultDisk: 30
+  defaultReplicaCount: 1
+
+metrics:
+  serviceMonitor:
+    enabled: true
+
+persistence:
+  defaultClassReplicaCount: 1
+
+csi:
+  # -- Replica count of the CSI Attacher. When unspecified, Longhorn uses the default value ("3").
+  attacherReplicaCount: 1
+  # -- Replica count of the CSI Provisioner. When unspecified, Longhorn uses the default value ("3").
+  provisionerReplicaCount: 1
+  # -- Replica count of the CSI Resizer. When unspecified, Longhorn uses the default value ("3").
+  resizerReplicaCount: 1
+  # -- Replica count of the CSI Snapshotter. When unspecified, Longhorn uses the default value ("3").
+  snapshotterReplicaCount: 1
+
+longhornUI:
+  replicas: 1
+
+ingress:
+  enabled: true
+  ingressClassName: tailscale
+  host: longhorn-ui
+  tls: true
+  tlsSecretName: longhorn-ui-tls
