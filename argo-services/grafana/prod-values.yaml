@@ -17,6 +17,8 @@ admin:
 persistence:
   enabled: true
   size: 10Gi
+  accessModes:
+    - ReadWriteMany
   storageClassName: local-path
 
 dashboardProviders:
