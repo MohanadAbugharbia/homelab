@@ -14,6 +14,9 @@ admin:
   userKey: user
   passwordKey: password
 
+deploymentStrategy:
+  type: Recreate # This is to avoid issues with the ReadWriteOnce access mode of the PVC
+
 persistence:
   enabled: true
   size: 10Gi
