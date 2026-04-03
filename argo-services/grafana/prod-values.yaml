@@ -24,30 +24,6 @@ persistence:
     - ReadWriteOnce
   storageClassName: local-path
 
-dashboardProviders:
- dashboardproviders.yaml:
-   apiVersion: 1
-   providers:
-   - name: 'default'
-     orgId: 1
-     folder: ''
-     type: file
-     disableDeletion: false
-     editable: true
-     options:
-       path: /var/lib/grafana/dashboards/default
-
-dashboards:
-  default:
-    kubernetes-dashboard:
-      gnetId: 18283
-      
-
-sidecar:
-  dashboards:
-    enabled: true
-    label: grafana_dashboard
-
 datasources:
   datasources.yaml:
     apiVersion: 1
