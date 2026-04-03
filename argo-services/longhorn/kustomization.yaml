@@ -19,6 +19,7 @@ patches:
       path: /metadata/annotations
       value:
         argocd.argoproj.io/sync-wave: "-3"
+        argocd.argoproj.io/hook: PreSync
 - target:
     kind: ServiceAccount
   patch: |-
@@ -26,6 +27,7 @@ patches:
       path: /metadata/annotations
       value:
         argocd.argoproj.io/sync-wave: "-2"
+        argocd.argoproj.io/hook: PreSync
 - target:
     kind: ClusterRoleBinding
   patch: |-
@@ -33,3 +35,4 @@ patches:
       path: /metadata/annotations
       value:
         argocd.argoproj.io/sync-wave: "-1"
+        argocd.argoproj.io/hook: PreSync
