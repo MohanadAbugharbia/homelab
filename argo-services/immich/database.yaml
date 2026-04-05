@@ -9,7 +9,7 @@ spec:
     size: 3Gi
     storageClass: longhorn
 
-  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.9-0.4.3
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.13
 
   postgresql:
     shared_preload_libraries:
