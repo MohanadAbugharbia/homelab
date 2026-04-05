@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: immich-database
 spec:
-  instances: 2
+  instances: 1
 
   storage:
     size: 3Gi
