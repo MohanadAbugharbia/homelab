@@ -8,8 +8,8 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi # Ignored by local-path provisioner, but required by PVC spec
-  storageClassName: local-path
+      storage: 30Gi
+  storageClassName: longhorn
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
