@@ -1,0 +1,17 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: hourly-fs-trim
+  namespace: longhorn-system
+  annotations:
+    longhorn.io/description: "Every hour"
+    longhorn.io/description.cron: "Every hour, on the hour"
+spec:
+  cron: "0 * * * ?"
+  task: "filesystem-trim"
+  groups:
+  - default
+  concurrency: 5
+  labels:
+    period: hourly

@@ -9,3 +9,6 @@ helmCharts:
   namespace: longhorn-system
   valuesFile: "prod-values.yaml"
   includeCRDs: true
+
+resources:
+  - recurring-jobs.yaml
