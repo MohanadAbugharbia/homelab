@@ -5,7 +5,7 @@ metadata:
   namespace: argo
 spec:
   destination:
-    namespace: odoo-operator
+    namespace: odoo-operator-system
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
