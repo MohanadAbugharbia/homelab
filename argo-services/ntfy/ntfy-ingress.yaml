@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ntfy-ingress
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: ntfy
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  ntfy-svc
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - ntfy
+      secretName: ntfy-tls

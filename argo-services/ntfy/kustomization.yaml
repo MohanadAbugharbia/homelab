@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+images:
+  - name: ntfy
+    newName: binwiederhier/ntfy
+    newTag: v1.28.0 # set deployed version
+
+namespace: ntfy
+
+resources:
+  - ntfy-deployment.yaml
+  - ntfy-svc.yaml
+  - ntfy-pvc.yaml
+  - ntfy-ingress.yaml
+
+configMapGenerator:
+  - name: server-config
+    files: 
+      - server.yaml
