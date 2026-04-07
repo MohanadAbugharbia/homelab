@@ -4,7 +4,7 @@ kind: Kustomization
 images:
   - name: ntfy
     newName: binwiederhier/ntfy
-    newTag: v1.28.0 # set deployed version
+    newTag: v2.21.0
 
 namespace: ntfy
 
