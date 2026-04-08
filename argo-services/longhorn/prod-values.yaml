@@ -2,6 +2,7 @@ defaultSettings:
   replicaAutoBalance: best-effort
   storageReservedPercentageForDefaultDisk: 30
   defaultReplicaCount: 1
+  createDefaultDiskLabeledNodes: true
 
 metrics:
   serviceMonitor:
