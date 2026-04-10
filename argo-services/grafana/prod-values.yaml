@@ -31,3 +31,8 @@ datasources:
         url: http://prometheus-kube-prometheus-prometheus:9090
         isDefault: true
         httpMethod: POST
+
+sidecar:
+  dashboards:
+    enabled: true
+    searchNamespace: ALL

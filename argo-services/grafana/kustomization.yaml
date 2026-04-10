@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - encrypted_secrets.yaml
+  - https://github.com/dotdc/grafana-dashboards-kubernetes
 
 helmCharts:
 - name: grafana
