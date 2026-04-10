@@ -4,10 +4,10 @@ kind: Kustomization
 images:
 - name: immich-server
   newName: ghcr.io/immich-app/immich-server
-  newTag: v2.6.3
+  newTag: v2.7.3
 - name: immich-ml
   newName: ghcr.io/immich-app/immich-machine-learning
-  newTag: v2.6.3
+  newTag: v2.7.3
 
 resources:
   - encrypted-secrets.yaml
