@@ -23,7 +23,7 @@ resources:
 helmCharts:
 - name: valkey
   repo: https://valkey.io/valkey-helm/
-  version: 0.9.3
+  version: 0.9.4
   releaseName: valkey
   namespace: immich
   valuesFile: valkey-values.yaml
