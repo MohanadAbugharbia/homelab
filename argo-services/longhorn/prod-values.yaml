@@ -9,7 +9,7 @@ metrics:
     enabled: true
 
 persistence:
-  defaultClassReplicaCount: 1
+  defaultClassReplicaCount: 2
 
 csi:
   # -- Replica count of the CSI Attacher. When unspecified, Longhorn uses the default value ("3").
