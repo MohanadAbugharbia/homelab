@@ -28,6 +28,8 @@ spec:
             value: /cache
           - name: MPLCONFIGDIR
             value: /cache/.config/matplotlib
+          - name: MACHINE_LEARNING_HTTP_KEEPALIVE_TIMEOUT_S
+            value: '0'
           - name: DB_HOSTNAME
             valueFrom:
               secretKeyRef:
