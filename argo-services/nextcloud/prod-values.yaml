@@ -47,3 +47,12 @@ metrics:
 prometheus:
   serviceMonitor:
     enabled: true
+
+
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+startupProbe:
+  enabled: false
+  
