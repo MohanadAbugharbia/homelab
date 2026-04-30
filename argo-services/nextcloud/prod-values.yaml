@@ -25,6 +25,9 @@ persistence:
     accessMode: ReadWriteMany
     size: 5Gi
 
+internalDatabase:
+  enabled: false
+
 externalDatabase:
   enabled: true
   type: postgresql
@@ -55,4 +58,3 @@ readinessProbe:
   enabled: false
 startupProbe:
   enabled: false
-  
