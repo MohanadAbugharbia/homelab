@@ -37,6 +37,10 @@ externalDatabase:
       usernameKey: username
       passwordKey: password
 
+cronjob:
+  enabled: true
+  type: cronjob
+
 metrics:
   enabled: true
 
