@@ -6,6 +6,10 @@ ingress:
         - nextcloud.tailc5dc8e.ts.net
       secretName: nextcloud-tls
 
+phpClientHttpsFix:
+  enabled: true
+  protocol: https
+
 nextcloud:
   host: nextcloud.tailc5dc8e.ts.net
   existingSecret:
