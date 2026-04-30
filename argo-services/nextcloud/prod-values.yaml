@@ -1,0 +1,45 @@
+ingress:
+  enabled: true
+  className: tailscale
+  tls:
+    - hosts:
+        - nextcloud.tailc5dc8e.ts.net
+      secretName: nextcloud-tls
+
+nextcloud:
+  host: nextcloud.tailc5dc8e.ts.net
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-credentials
+    usernameKey: username
+    passwordKey: password
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteMany
+  size: 1Gi
+  storageClass: longhorn
+  nextcloudData:
+    enabled: true
+    storageClass: longhorn
+    accessMode: ReadWriteMany
+    size: 5Gi
+
+externalDatabase:
+  enabled: true
+  type: postgresql
+  postgresql:
+    host: shared-pg.shared.svc.cluster.local:5432
+    database: nextcloud
+    existingSecret:
+      enabled: true
+      secretName: nextcloud-db-cred
+      usernameKey: username
+      passwordKey: password
+
+metrics:
+  enabled: true
+
+prometheus:
+  serviceMonitor:
+    enabled: true
