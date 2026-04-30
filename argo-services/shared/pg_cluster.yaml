@@ -1,0 +1,36 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: shared-pg
+spec:
+  instances: 1
+
+  storage:
+    size: 3Gi
+    storageClass: longhorn
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:18
+
+  managed:
+    roles:
+      - name: nextcloud
+        ensure: present
+        login: true
+        superuser: false
+        createdb: false
+        passwordSecret:
+          name: nextcloud-db-cred
+  monitoring:
+    enablePodMonitor: true
+  switchoverDelay: 60
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: nextcloud-database
+spec:
+  name: nextcloud
+  owner: nextcloud
+  cluster:
+    name: shared-pg
