@@ -10,7 +10,6 @@ images:
 
 resources:
   - encrypted_secrets.yaml
-  - database.yaml
   - role.yaml
   - rolebinding.yaml
   - serviceaccount.yaml
