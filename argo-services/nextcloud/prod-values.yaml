@@ -21,7 +21,7 @@ nextcloud:
 persistence:
   enabled: true
   accessMode: ReadWriteMany
-  size: 1Gi
+  size: 3Gi
   storageClass: longhorn
   nextcloudData:
     enabled: true
