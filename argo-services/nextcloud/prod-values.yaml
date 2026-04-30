@@ -31,14 +31,13 @@ internalDatabase:
 externalDatabase:
   enabled: true
   type: postgresql
-  postgresql:
-    host: shared-pg.shared.svc.cluster.local:5432
-    database: nextcloud
-    existingSecret:
-      enabled: true
-      secretName: nextcloud-db-cred
-      usernameKey: username
-      passwordKey: password
+  host: shared-pg.shared.svc.cluster.local:5432
+  database: nextcloud
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-db-cred
+    usernameKey: username
+    passwordKey: password
 
 cronjob:
   enabled: true
