@@ -11,15 +11,6 @@ spec:
 
   imageName: ghcr.io/cloudnative-pg/postgresql:18
 
-  bootstrap:
-    initdb:
-      import:
-        type: microservice
-        databases:
-          - deploy_confidence
-        source:
-          externalCluster: deploy-confidence-database
-
   managed:
     roles:
       - name: nextcloud
@@ -36,17 +27,6 @@ spec:
         createdb: false
         passwordSecret:
           name: deploy-confidence-db-cred
-
-  externalClusters:
-    - name: deploy-confidence-database
-      connectionParameters:
-        # Use the correct IP or host name for the source database
-        host: deploy-confidence-database-rw.deploy-confidence.svc.cluster.local
-        user: deploy_confidence
-        dbname: deploy_confidence
-      password:
-        name: deploy-confidence-db-cred
-        key: password
 
   monitoring:
     enablePodMonitor: true
