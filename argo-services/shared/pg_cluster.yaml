@@ -11,6 +11,15 @@ spec:
 
   imageName: ghcr.io/cloudnative-pg/postgresql:18
 
+  bootstrap:
+    initdb:
+      import:
+        type: microservice
+        databases:
+          - deploy_confidence
+        source:
+          externalCluster: deploy-confidence-database
+
   managed:
     roles:
       - name: nextcloud
@@ -20,6 +29,25 @@ spec:
         createdb: false
         passwordSecret:
           name: nextcloud-db-cred
+      - name: deploy_confidence
+        ensure: present
+        login: true
+        superuser: false
+        createdb: false
+        passwordSecret:
+          name: deploy-confidence-db-cred
+
+  externalClusters:
+    - name: deploy-confidence-database
+      connectionParameters:
+        # Use the correct IP or host name for the source database
+        host: deploy-confidence-database-rw.deploy-confidence.svc.cluster.local
+        user: deploy_confidence
+        dbname: deploy_confidence
+      password:
+        name: deploy-confidence-db-cred
+        key: password
+
   monitoring:
     enablePodMonitor: true
   switchoverDelay: 60
@@ -32,5 +60,15 @@ metadata:
 spec:
   name: nextcloud
   owner: nextcloud
+  cluster:
+    name: shared-pg
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: deploy-confidence-database
+spec:
+  name: deploy_confidence
+  owner: deploy_confidence
   cluster:
     name: shared-pg
