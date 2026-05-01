@@ -27,6 +27,13 @@ spec:
         createdb: false
         passwordSecret:
           name: deploy-confidence-db-cred
+      - name: pal_odoo
+        ensure: present
+        login: true
+        superuser: false
+        createdb: true
+        passwordSecret:
+          name: pal-odoo-db-cred
 
   monitoring:
     enablePodMonitor: true
