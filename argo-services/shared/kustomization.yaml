@@ -6,3 +6,4 @@ namespace: shared
 resources:
   - encrypted-secrets.yaml
   - pg_cluster.yaml
+  - pg_shared_17.yaml
