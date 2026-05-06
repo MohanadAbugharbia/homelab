@@ -27,7 +27,7 @@ persistence:
     enabled: true
     storageClass: longhorn
     accessMode: ReadWriteMany
-    size: 5Gi
+    size: 15Gi
 
 internalDatabase:
   enabled: false
