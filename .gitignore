@@ -1,1 +1,5 @@
 argo-services/**/charts
+secret.yaml
+secret.yml
+secrets.yaml
+secret.yml

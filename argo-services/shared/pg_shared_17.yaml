@@ -20,6 +20,13 @@ spec:
         createdb: true
         passwordSecret:
           name: pal-odoo-db-cred
+      - name: pal_odoo_1
+        ensure: present
+        login: true
+        superuser: false
+        createdb: true
+        passwordSecret:
+          name: pal-odoo-1-db-cred
 
   monitoring:
     enablePodMonitor: true
