@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
 - name: cloudnative-pg
   repo: https://cloudnative-pg.github.io/charts
-  version: 0.28.0
+  version: 0.28.3
   releaseName: cnpg
   namespace: cnpg-system
   valuesFile: "prod-values.yaml"
