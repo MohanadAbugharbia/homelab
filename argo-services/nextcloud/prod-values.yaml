@@ -60,10 +60,10 @@ prometheus:
   serviceMonitor:
     enabled: false
 
-
+# TODO: figure out realistic values for probes, currently they hinder the upgrades
 livenessProbe:
-  enabled: true
+  enabled: false
 readinessProbe:
-  enabled: true
+  enabled: false
 startupProbe:
-  enabled: true
+  enabled: false
