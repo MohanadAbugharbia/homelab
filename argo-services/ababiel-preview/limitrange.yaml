@@ -1,0 +1,16 @@
+# Back-stop for the ResourceQuota: a quota on cpu/memory rejects any pod that
+# does not declare requests and limits, so give every container defaults.
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: ababiel-preview
+  namespace: ababiel-preview
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 250m
+        memory: 512Mi
+      default:
+        cpu: "2"
+        memory: 2Gi

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# No `namespace:` key on purpose: it would relocate the ApplicationSet, which
+# must live in the argo namespace. Every namespaced resource below carries its
+# own namespace.
+resources:
+  - namespace.yaml
+  - resourcequota.yaml
+  - limitrange.yaml
+  - networkpolicy.yaml
+  - encrypted-secrets.yaml
+  - applicationset.yaml

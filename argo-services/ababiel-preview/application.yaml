@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ababiel-preview
+  namespace: argo
+spec:
+  destination:
+    namespace: ababiel-preview
+    server: https://kubernetes.default.svc
+  # The default project may create cluster-scoped resources (the namespace)
+  # and place the ApplicationSet in the argo namespace.
+  project: default
+  source:
+    repoURL: git@github.com:MohanadAbugharbia/homelab.git
+    path: argo-services/ababiel-preview
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      enabled: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

@@ -1,0 +1,20 @@
+# Caps the namespace at three concurrent preview environments: per environment
+# the OdooDeployment requests 250m/512Mi and limits 2 CPU/2Gi (deploy/preview
+# in pal-odoo), one Odoo pod runs at a time (the Deployment is scaled to zero
+# while a maintenance Job runs) and one 2Gi filestore PVC exists.
+# A fourth labelled PR sits Pending with Degraded/QuotaExceeded until one of
+# the others is torn down.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ababiel-preview
+  namespace: ababiel-preview
+spec:
+  hard:
+    pods: "6"
+    requests.cpu: "2"
+    requests.memory: 3Gi
+    limits.cpu: "6"
+    limits.memory: 6Gi
+    persistentvolumeclaims: "4"
+    requests.storage: 20Gi

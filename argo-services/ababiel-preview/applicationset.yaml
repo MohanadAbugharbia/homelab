@@ -1,0 +1,75 @@
+# One Application per pal-odoo pull request that carries the `preview` label.
+# The label is the only filter (base branches are deliberately unfiltered so
+# stacked PRs preview their head commit). Manifests come from the PR's own
+# deploy/preview directory at its head sha; ArgoCD polls GitHub every 60 s.
+#
+# Requires, outside this repo (see docs/ababiel-preview-runbook.md):
+#   - the AppProject `ababiel-preview` and the generator token Secret
+#     `ababiel-preview-github-token`, both in the argo namespace, plus the
+#     pal-odoo repository credential — all from the ArgoCD Helm values;
+#   - the operator health check for OdooDeployment (same values file).
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ababiel-preview
+  namespace: argo
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - pullRequest:
+        github:
+          owner: MohanadAbugharbia
+          repo: pal-odoo
+          labels:
+            - preview
+          tokenRef:
+            secretName: ababiel-preview-github-token
+            key: token
+        requeueAfterSeconds: 60
+  template:
+    metadata:
+      name: 'ababiel-pr-{{.number}}'
+      namespace: argo
+      labels:
+        app.kubernetes.io/part-of: ababiel-preview
+        ababiel.abugharbia.com/pr: '{{.number}}'
+      annotations:
+        ababiel.abugharbia.com/branch: '{{.branch}}'
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: ababiel-preview
+      source:
+        repoURL: git@github.com:MohanadAbugharbia/pal-odoo.git
+        targetRevision: '{{.head_sha}}'
+        path: deploy/preview
+        kustomize:
+          nameSuffix: '-pr-{{.number}}'
+          images:
+            - 'ghcr.io/mohanadabugharbia/pal-odoo:sha-{{.head_sha}}'
+          patches:
+            - target:
+                kind: OdooDeployment
+              patch: |-
+                - op: replace
+                  path: /spec/database/name
+                  value: pal_odoo_pr_{{.number}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: ababiel-preview
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=false
+        retry:
+          limit: 5
+          backoff:
+            duration: 30s
+            factor: 2
+            maxDuration: 5m
+      info:
+        - name: Preview URL
+          value: 'https://ababiel-pr-{{.number}}.tailc5dc8e.ts.net'

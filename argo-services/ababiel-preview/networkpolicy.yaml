@@ -1,0 +1,53 @@
+# Preview pods run pull-request code, so they only get to talk to what they
+# need: Tailscale ingress proxies reach them on 8069, they reach kube-dns and
+# the shared PostgreSQL cluster, nothing else. Image pulls happen on the node
+# and are not affected. k3s enforces NetworkPolicy through kube-router by
+# default (unless the server runs with --disable-network-policy).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ababiel-preview
+  namespace: ababiel-preview
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        # Proxy pods created by the Tailscale operator for each Ingress carry
+        # tailscale.com/managed whatever namespace the operator runs in ...
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              tailscale.com/managed: "true"
+        # ... and the operator's default namespace is allowed as a whole too.
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tailscale
+      ports:
+        - protocol: TCP
+          port: 8069
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: shared
+          podSelector:
+            matchLabels:
+              cnpg.io/cluster: shared-pg
+      ports:
+        - protocol: TCP
+          port: 5432
