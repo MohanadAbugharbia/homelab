@@ -14,19 +14,29 @@ My personal homelab running on Kubernetes (k3s), managed via GitOps with ArgoCD.
 | [cert-manager](https://cert-manager.io) | `cert-manager` | Automated TLS certificate management |
 | [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) | `sealed-secrets` | Encrypted secrets safe to store in git |
 | [stakater-reloader](https://github.com/stakater/Reloader) | `stakater` | Automatic pod restarts on ConfigMap/Secret changes |
+| [odoo-operator](https://github.com/MohanadAbugharbia/odoo-operator) | `odoo-operator-system` | Operator managing `OdooDeployment` resources (databases, upgrades, pods) |
+| shared | `shared` | Shared CNPG PostgreSQL cluster (`shared-pg`) and its role credentials |
+| ababiel-preview | `ababiel-preview` | Per-pull-request preview environments of [pal-odoo](https://github.com/MohanadAbugharbia/pal-odoo) (ApplicationSet, quota, network policy); see [docs/ababiel-preview-runbook.md](docs/ababiel-preview-runbook.md) |
 
 ## Structure
 
 ```
 argo-services/          # ArgoCD Application manifests + Helm values per service
+├── ababiel-preview/
 ├── cert-manager/
 ├── cnpg/
+├── deploy-confidence-service/
 ├── grafana/
 ├── immich/
 ├── longhorn/
+├── nextcloud/
+├── odoo-operator/
 ├── prometheus/
 ├── sealed-secrets/
+├── shared/
 └── stakater-reloader/
+docs/                   # Runbooks
+└── ababiel-preview-runbook.md
 ```
 
 Each service directory contains an ArgoCD `Application` manifest and the Helm values or raw Kubernetes manifests for that service. ArgoCD watches this repo and automatically syncs changes to the cluster.
