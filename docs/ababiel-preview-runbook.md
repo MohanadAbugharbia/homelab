@@ -71,6 +71,15 @@ values file. Merge the snippet below into it (the existing keys —
 `accounts.mabugharbia`, `kustomize.buildOptions`, the RBAC, notifications and
 the server Ingress — stay untouched) and re-run the same `helm upgrade`.
 
+**The `OdooDeployment` health check is not optional and not cosmetic.** The
+preview base puts its Tailscale Ingress in ArgoCD sync wave 1 so that the route
+is created only after the operator's `<name>-http` Service exists — an Ingress
+admitted against a missing backend stays stuck instead of picking the Service
+up later. Wave 0 only blocks because this Lua check withholds `Healthy` until
+`phase: Running` with `Ready=True`; without it ArgoCD assumes an unknown CRD is
+healthy on apply, the wave gates nothing, and stuck Ingresses come back. Keep
+it whenever this values file is edited or ArgoCD is reinstalled.
+
 ```yaml
 configs:
   cm:
