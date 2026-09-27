@@ -12,7 +12,7 @@ My personal homelab running on Kubernetes (k3s), managed via GitOps with ArgoCD.
 | [Longhorn](https://longhorn.io) | `longhorn-system` | Distributed block storage |
 | [CNPG](https://cloudnative-pg.io) | `cnpg-system` | CloudNativePG PostgreSQL operator |
 | [cert-manager](https://cert-manager.io) | `cert-manager` | Automated TLS certificate management |
-| [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) | `sealed-secrets` | Encrypted secrets safe to store in git |
+| [sealed-secrets](https://github.com/bitnami/sealed-secrets) | `sealed-secrets` | Encrypted secrets safe to store in git |
 | [stakater-reloader](https://github.com/stakater/Reloader) | `stakater` | Automatic pod restarts on ConfigMap/Secret changes |
 | [odoo-operator](https://github.com/MohanadAbugharbia/odoo-operator) | `odoo-operator-system` | Operator managing `OdooDeployment` resources (databases, upgrades, pods) |
 | shared | `shared` | Shared CNPG PostgreSQL cluster (`shared-pg`) and its role credentials |
