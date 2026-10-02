@@ -7,7 +7,11 @@
 #   - the AppProject `ababiel-preview` and the generator token Secret
 #     `ababiel-preview-github-token`, both in the argo namespace, plus the
 #     pal-odoo repository credential — all from the ArgoCD Helm values;
-#   - the operator health check for OdooDeployment (same values file).
+#   - the operator health check for OdooDeployment (same values file) — the
+#     preview base orders its Ingress behind the OdooDeployment with a sync
+#     wave, and that wave only waits because this health check withholds
+#     Healthy until the operator's Services exist. Without it the Ingress is
+#     applied against a missing backend and stays stuck.
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
