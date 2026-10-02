@@ -4,7 +4,6 @@ existingSecret: hindsight-secret
 
 api:
   env:
-    # TODO: pick your LLM provider/model (key goes in hindsight-secret)
     HINDSIGHT_API_LLM_PROVIDER: "openai"
     HINDSIGHT_API_LLM_MODEL: "gpt-5-mini"
     HINDSIGHT_API_TENANT_EXTENSION: "hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension"
