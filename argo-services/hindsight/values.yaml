@@ -1,0 +1,37 @@
+# All keys in this secret are injected as env vars into api, worker and control plane.
+# postgres-password is used to build HINDSIGHT_API_DATABASE_URL.
+existingSecret: hindsight-secret
+
+api:
+  env:
+    HINDSIGHT_API_LLM_PROVIDER: "openai"
+    HINDSIGHT_API_LLM_MODEL: "gpt-5-mini"
+    HINDSIGHT_API_TENANT_EXTENSION: "hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension"
+  persistence:
+    modelCache:
+      enabled: true
+      size: 5Gi
+      storageClass: longhorn
+
+postgresql:
+  enabled: false
+  external:
+    # CNPG read-write service
+    host: hindsight-database-rw
+    port: 5432
+    database: hindsight
+    username: hindsight
+
+ingress:
+  enabled: true
+  className: tailscale
+  hosts:
+    - host: hindsight
+      paths:
+        - path: /
+          pathType: Prefix
+          service: controlPlane
+  tls:
+    - secretName: hindsight-tls
+      hosts:
+        - hindsight

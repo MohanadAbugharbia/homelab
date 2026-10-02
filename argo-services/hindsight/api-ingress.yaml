@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hindsight-api
+spec:
+  ingressClassName: tailscale
+  rules:
+  - host: hindsight-api
+    http:
+      paths:
+      - backend:
+          service:
+            name: hindsight-api
+            port:
+              number: 8888
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - hindsight-api
+    secretName: hindsight-api-tls
