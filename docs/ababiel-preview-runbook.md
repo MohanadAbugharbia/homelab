@@ -215,7 +215,7 @@ name differs from what it was sealed for.
    `spec.database.name: keepme` and `deletionPolicy: Delete` in
    `ababiel-preview` → `provisionedBy: external`; delete the CR → `keepme`
    still exists.
-6. Capacity: a fourth labelled PR sits `Pending` with `Degraded: QuotaExceeded`;
+6. Capacity: a sixth labelled PR sits `Pending` with `Degraded: QuotaExceeded`;
    unlabel another one and it proceeds.
 
 ## Operations
@@ -260,7 +260,7 @@ Odoo logs, raise `postgresql.parameters.max_connections` in
 | Application `ComparisonError` on `deploy/preview` | PR branched before `deploy/preview` existed, or the deploy key cannot read pal-odoo | Rebase the PR; check `argocd repo list` |
 | Pod `ImagePullBackOff` | `ghcr-pull` not unsealed, PAT expired, or the image for that sha was not built yet (`build-preview` still running or failed) | Step 4; check the PR's checks |
 | `OdooDeployment` `Pending`, `Degraded: DatabaseConnectionFailed` | `pal-odoo-db-cred` not unsealed in `ababiel-preview` | Step 4 |
-| `Pending`, `Degraded: QuotaExceeded` | Three environments already running | Unlabel one, or raise the quota |
+| `Pending`, `Degraded: QuotaExceeded` | Five environments already running | Unlabel one, or raise the quota |
 | `Failed`, `Degraded: InitJobFailed` | A module failed to install on the PR's code | `kubectl logs job/...`; fix the PR and push, or delete the Job to retry |
 | Pods never Ready, logs fine | NetworkPolicy blocks the probes or the ingress proxy | Step 5 |
 | Database left behind after teardown | Drop refused (comment mismatch) or connection failure at deletion time; the operator emits a `DatabaseDropRefused` / `DatabaseNotDropped` event | Inspect `\l+`, drop by hand |
