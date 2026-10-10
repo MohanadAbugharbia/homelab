@@ -15,10 +15,10 @@ down, database included.
 | pal-odoo | `deploy/preview/` | Kustomize base: one `OdooDeployment` (`ababiel`) and one Tailscale `Ingress`; rewritten per PR by the ApplicationSet |
 | pal-odoo | `.github/workflows/preview-cleanup.yaml` | Deletes the PR's GHCR tags on close/unlabel |
 | homelab | `argo-services/ababiel-preview/` | Namespace, `ResourceQuota`, `LimitRange`, `NetworkPolicy`, the two sealed secrets and the `ApplicationSet` |
-| homelab | `argo-services/odoo-operator/` | The operator, pinned to 0.3.0 |
+| homelab | `argo-services/odoo-operator/` | The operator, pinned to 0.4.0 |
 | homelab | `argo-services/shared/pg_cluster.yaml` | `shared-pg`, where the `pal_odoo` role creates one database per PR |
 | ArgoCD Helm values (outside git) | `configs.cm`, `configs.repositories`, `extraObjects` | Health check for `OdooDeployment`, the pal-odoo deploy key, the generator token and the `ababiel-preview` AppProject |
-| odoo-operator ≥ 0.3.0 | `OdooDeployment` | Creates/drops the database (only its own), runs init and upgrade Jobs, owns the pods |
+| odoo-operator ≥ 0.3.0 | `OdooDeployment` | Creates/drops the database (only its own), runs init and upgrade Jobs, owns the pods; from 0.4.0 also serves `spec.maintenancePage` (a `<name>-maintenance` pod the `-http` Service points at while Odoo has no ready pod) |
 
 Names for PR 12: Application `ababiel-pr-12`; OdooDeployment, Deployment and
 Ingress `ababiel-pr-12`; Services `ababiel-pr-12-http` / `-poll`; database

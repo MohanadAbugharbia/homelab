@@ -2,10 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - https://github.com/MohanadAbugharbia/odoo-operator/releases/download/0.3.0/install.yaml
+  - https://github.com/MohanadAbugharbia/odoo-operator/releases/download/0.4.0/install.yaml
 
 patches:
-  # The 0.3.0 CRD embeds corev1.Probe and PodSecurityContext schemas and no
+  # Since 0.3.0 the CRD embeds corev1.Probe and PodSecurityContext schemas and no
   # longer fits in the kubectl.kubernetes.io/last-applied-configuration
   # annotation; sync it with Replace (same pattern as the CNPG CRDs).
   - target:
